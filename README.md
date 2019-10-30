@@ -1,1 +1,1 @@
-Fron end code for QA idividual project
+Front end code for QA idividual project
