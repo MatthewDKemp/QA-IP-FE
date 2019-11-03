@@ -58,8 +58,9 @@ function populateTable(jsData){
         let deleteBtn=document.createElement("button");
         let bookingsBtn=document.createElement("button");
 
-        updateBtn.style.marginRight="2%";
-        deleteBtn.style.marginRight="2%";
+        updateBtn.style.margin="2%";
+        deleteBtn.style.margin="2%";
+        bookingsBtn.style.margin="2%";
 
         buttons.appendChild(updateBtn);
         buttons.appendChild(deleteBtn);
@@ -86,6 +87,8 @@ function populateTable(jsData){
         tablerow.appendChild(email);
         tablerow.appendChild(phone);
         tablerow.appendChild(buttons);
+
+        tablerow.style.verticalAlign="middle";
 
         table.appendChild(tablerow);
         
