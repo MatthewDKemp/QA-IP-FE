@@ -1,25 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Manage Customers</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Manage Customers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
 
-<body>
+  <body>
 
-  <div class="jumbotron text-center">
-    <h4>Manage Customers</h4>
-  </div>
+    <!Navigation Bar>
+    <nav class="navbar navbar-default" style="background-color:darkslateblue">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="color: whitesmoke;" href="index.html">MK Travel</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active" ><a href="index.html">Manage Customers</a></li>
+          <li class="disabled"><a href="bookings.html">Manage Bookings</a></li>
+          <li class="disabled"><a href="destinations.html">Manage Destinations</a></li>
+        </ul>
+      </div>
+    </nav>
 
-  <h3>Adding test text 2nd try</h3>
-  <div>
-    <ul id="recipe-list" class="list-group">
-    </ul>
-  </div>
-    
-</body>
+    <h1 style="text-align:center; background-color:darkslateblue;color: whitesmoke;">Manage Customers</h1>
+
+    <button type="button" id="addBtn" style="width:5em;height:10%;position: absolute;top:22%;left:45%;background-color:limegreen;color:black" onclick="formVisibility('addFrmWnd','editFrmWnd','existTbl')">Add New</button>
+    <button type="button" id="existBtn" style="width:5em;height:10%;position: absolute;top:22%;left:55%;background-color:crimson;color: whitesmoke;" onclick="formVisibility('existTbl','addFrmWnd','editFrmWnd')">View Existing</button>
+
+    <!New customer form>
+    <div class="container" id="addFrmWnd" style="visibility: hidden;position: absolute;top:30%;left: 0%">
+      <h2>Add customer details:</h2>
+      <form class="form-horizontal" id="addFrm" onsubmit="return createRecord(this)">
+      
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="Fname">First Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="Lname">Surname:</label>
+          <div class="col-sm-10">          
+            <input type="text" class="form-control" id="lname" placeholder="Enter surname">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
+          <div class="col-sm-10">          
+            <input type="date" class="form-control" id="dob" placeholder="Enter surname">
+          </div>
+        </div>
+        
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email Address:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="Phone">Phone Number:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+        </div>
+      </div>
+        
+        
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!Edit customer form>
+    <div class="container" id="editFrmWnd" style="visibility: hidden;position: absolute;top:30%;left: 0%">
+      <h2>Edit customer details:</h2>
+      <form class="form-horizontal" id="editFrm" onsubmit="return updateRecord(this)">
+      
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="Fname">First Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="Lname">Surname:</label>
+          <div class="col-sm-10">          
+            <input type="text" class="form-control" id="lname" placeholder="Enter surname">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
+          <div class="col-sm-10">          
+            <input type="date" class="form-control" id="dob" placeholder="Enter surname">
+          </div>
+        </div>
+        
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email Address:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="Phone">Phone Number:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+        </div>
+      </div>
+
+      <input type="text" id="id" style="visibility: hidden">
+        
+        
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+<!Exisitng customer table>
+<div class="container" id="existTbl" style="visibility: hidden;position: absolute;top:30%;left: 0%">
+  <h2>Exisitng customer details:</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Surname</th>
+        <th>Date of Birth</th>
+        <th>Email Adress</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody id=customerTable </tbody>
+  </table>
+
+
+  
+</div>
+
+    <script src="functionality.js"></script>
+  </body>
 </html>
