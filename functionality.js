@@ -6,6 +6,13 @@ function formVisibility(toShow,toHide1,toHide2){
     clearForm();
 }
 
+function clearForm(){  
+    let form=document.getElementById("addFrm");
+    for (let info of form){
+            info.value="";
+    } 
+}
+
 
 function createRecord(form){
     let record ={};
@@ -19,8 +26,10 @@ function createRecord(form){
     let request=new XMLHttpRequest();
     request.open("POST","http://"+location.hostname+":8081/passenger")
     request.setRequestHeader("Content-Type","application/json");
+    request.onload=function(){
+        readRecords();
+    }
     request.send(record);
-    return false;
 }
 
 
@@ -37,20 +46,34 @@ function readRecords(){
 function populateTable(jsData){
     let table=document.getElementById("customerTable");
     table.innerHTML="";
-    for(let passenger of jsData){
+    for(let passenger of jsData){   
         let tablerow=document.createElement("tr");
         let firstName= document.createElement("td");
         let surname= document.createElement("td");
         let dob= document.createElement("td");
         let email= document.createElement("td");
         let phone= document.createElement("td");
+        let buttons=document.createElement("td");
         let updateBtn=document.createElement("button");
         let deleteBtn=document.createElement("button");
         let bookingsBtn=document.createElement("button");
 
+        updateBtn.style.marginRight="2%";
+        deleteBtn.style.marginRight="2%";
+
+        buttons.appendChild(updateBtn);
+        buttons.appendChild(deleteBtn);
+        buttons.appendChild(bookingsBtn);
+
+        let date = new Date(passenger.dob);
+        let d = date.getDate();
+        let m = date.getMonth() + 1;
+        let y = date.getFullYear();
+        let dateoutput=(d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
+
         firstName.innerHTML = passenger.fname;
         surname.innerHTML = passenger.lname;
-        dob.innerHTML = passenger.dob;
+        dob.innerHTML = dateoutput;
         email.innerHTML = passenger.email;
         phone.innerHTML = passenger.phone;
         updateBtn.innerHTML="Update";
@@ -62,9 +85,7 @@ function populateTable(jsData){
         tablerow.appendChild(dob);
         tablerow.appendChild(email);
         tablerow.appendChild(phone);
-        tablerow.appendChild(updateBtn);
-        tablerow.appendChild(deleteBtn);
-        tablerow.appendChild(bookingsBtn);
+        tablerow.appendChild(buttons);
 
         table.appendChild(tablerow);
         
@@ -101,10 +122,10 @@ function updateRecord(form){
     let request=new XMLHttpRequest();
     request.open("PUT","http://"+location.hostname+":8081/passenger/")
     request.setRequestHeader("Content-Type","application/json");
-    request.send(record);
     request.onload=function(){
         readRecords();
     }
+    request.send(record);
 }
 
 function deleteRecord(id){
@@ -115,11 +136,4 @@ function deleteRecord(id){
         readRecords();
     }
     request.send();
-}
-
-function clearForm(){  
-    let form=document.getElementById("addFrm");
-    for (let info of form){
-            info.value="";
-    } 
 }
