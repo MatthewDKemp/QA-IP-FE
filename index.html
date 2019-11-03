@@ -4,146 +4,153 @@
     <title>Manage Customers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
 
     <!Navigation Bar>
-    <nav class="navbar navbar-default" style="background-color:darkslateblue">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" style="color: whitesmoke;" href="index.html">MK Travel</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active" ><a href="index.html">Manage Customers</a></li>
-          <li class="disabled"><a href="bookings.html">Manage Bookings</a></li>
-          <li class="disabled"><a href="destinations.html">Manage Destinations</a></li>
+    <nav class="navbar navbar-expand-sm" style="background-color:navy">
+      <a class="navbar-brand" style="color:whitesmoke;font-size:150%;">MK Travel</a>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" style="color: whitesmoke;" href="index.html">Manage Customers</a></li>
+          <li class="nav-item"><a class="nav-link disabled" href="bookings.html">Manage Bookings</a></li>
+          <li class="nav-item"><a class="nav-link disabled" href="destinations.html">Manage Destinations</a></li>
         </ul>
-      </div>
     </nav>
+    <div style="padding: 1%;"> </div>
+    <h2 style="text-align:center; background-color:navy;color: whitesmoke;padding: 0.5%;">Manage Customers</h1>
 
-    <h1 style="text-align:center; background-color:darkslateblue;color: whitesmoke;">Manage Customers</h1>
-
-    <button type="button" id="addBtn" style="width:5em;height:10%;position: absolute;top:22%;left:45%;background-color:limegreen;color:black" onclick="formVisibility('addFrmWnd','editFrmWnd','existTbl')">Add New</button>
-    <button type="button" id="existBtn" style="width:5em;height:10%;position: absolute;top:22%;left:55%;background-color:crimson;color: whitesmoke;" onclick="formVisibility('existTbl','addFrmWnd','editFrmWnd')">View Existing</button>
+    <button type="button" id="addBtn" style="width:7%;height:10%;position: absolute;top:30%;left:45%;background-color:limegreen;color:black" onclick="formVisibility('addFrmWnd','editFrmWnd','existTbl')">Add New</button>
+    <button type="button" id="existBtn" style="width:7%;height:10%;position: absolute;top:30%;left:55%;background-color:crimson;color: whitesmoke;" onclick="formVisibility('existTbl','addFrmWnd','editFrmWnd')">View Existing</button>
 
     <!New customer form>
-    <div class="container" id="addFrmWnd" style="visibility: hidden;position: absolute;top:30%;left: 0%">
+    <div class="container" id="addFrmWnd" style="visibility: hidden;position: absolute;top:40%;left: 0%">
       <h2>Add customer details:</h2>
       <form class="form-horizontal" id="addFrm" onsubmit="return createRecord(this)">
       
         <div class="form-group">
           <label class="control-label col-sm-2" for="Fname">First Name:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+            <input type="text" class="form-control" id="fname" placeholder="Enter first name" autocomplete="off">
+            <span id=fnamecheck" style="visibility: hidden"></span>
           </div>
         </div>
         
         <div class="form-group">
           <label class="control-label col-sm-2" for="Lname">Surname:</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="lname" placeholder="Enter surname">
+            <input type="text" class="form-control" id="lname" placeholder="Enter surname" autocomplete="off">
+            <span id="lnamecheck" style="visibility: hidden;"></span>
           </div>
         </div>
         
         <div class="form-group">
           <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
           <div class="col-sm-10">          
-            <input type="date" class="form-control" id="dob" placeholder="Enter surname">
+            <input type="date" class="form-control" id="dob" placeholder="Enter surname" autocomplete="off">
+            <span id="dobcheck"style="visibility: hidden"></span>
           </div>
         </div>
         
       <div class="form-group">
         <label class="control-label col-sm-2" for="email">Email Address:</label>
         <div class="col-sm-10">
-          <input type="email" class="form-control" id="email" placeholder="Enter email">
+          <input type="email" class="form-control" id="email" placeholder="Enter email" autocomplete="off">
+          <span id="emailcheck" style="visibility: hidden"></span>
         </div>
       </div>
       
       <div class="form-group">
         <label class="control-label col-sm-2" for="Phone">Phone Number:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+          <input type="text" class="form-control" id="phone" placeholder="Enter phone number" autocomplete="off">
+          <span id="phonecheck"style="visibility: hidden"></span>
         </div>
       </div>
         
         
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-primary" style="background-color: navy;border-color: navy;">Submit</button>
           </div>
         </div>
       </form>
     </div>
 
     <!Edit customer form>
-    <div class="container" id="editFrmWnd" style="visibility: hidden;position: absolute;top:30%;left: 0%">
+    <div class="container" id="editFrmWnd" style="visibility: hidden;position: absolute;top:40%;left: 0%">
       <h2>Edit customer details:</h2>
       <form class="form-horizontal" id="editFrm" onsubmit="return updateRecord(this)">
       
         <div class="form-group">
           <label class="control-label col-sm-2" for="Fname">First Name:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+            <input type="text" class="form-control" id="fname" placeholder="Enter first name" autocomplete="off">
+            <span id=fnamecheck" style="visibility: hidden"></span>
           </div>
         </div>
         
         <div class="form-group">
           <label class="control-label col-sm-2" for="Lname">Surname:</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="lname" placeholder="Enter surname">
+            <input type="text" class="form-control" id="lname" placeholder="Enter surname" autocomplete="off">
+            <span id=lnamecheck" style="visibility: hidden"></span>
           </div>
         </div>
         
         <div class="form-group">
           <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
           <div class="col-sm-10">          
-            <input type="date" class="form-control" id="dob" placeholder="Enter surname">
+            <input type="date" class="form-control" id="dob" placeholder="Enter surname" autocomplete="off">
+            <span id=dobcheck" style="visibility: hidden"></span>
           </div>
         </div>
         
       <div class="form-group">
         <label class="control-label col-sm-2" for="email">Email Address:</label>
         <div class="col-sm-10">
-          <input type="email" class="form-control" id="email" placeholder="Enter email">
+          <input type="email" class="form-control" id="email" placeholder="Enter email" autocomplete="off">
+          <span id=emailcheck" style="visibility: hidden"></span>
         </div>
       </div>
       
       <div class="form-group">
         <label class="control-label col-sm-2" for="Phone">Phone Number:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+          <input type="text" class="form-control" id="phone" placeholder="Enter phone number" autocomplete="off">
+          <span id=phonecheck" style="visibility: hidden"></span>
         </div>
       </div>
 
-      <input type="text" id="id" style="visibility: hidden">
-        
-        
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-primary" style="background-color: navy;border-color: navy;">Submit</button>
+            <input type="text" id="id" style="visibility: hidden">
           </div>
         </div>
+
       </form>
     </div>
 
 <!Exisitng customer table>
-<div class="container" id="existTbl" style="visibility: hidden;position: absolute;top:30%;left: 0%">
+<div class="container" id="existTbl" style="visibility: hidden;position: absolute;top:40%;left: 0%">
   <h2>Exisitng customer details:</h2>
-  <table class="table table-bordered">
+  <table class="table table-bordered" style="text-align: center;border-style: solid;">
     <thead>
       <tr>
         <th>First Name</th>
         <th>Surname</th>
         <th>Date of Birth</th>
-        <th>Email Adress</th>
+        <th>Email Address</th>
         <th>Phone Number</th>
+        <th>Manage</th>
       </tr>
     </thead>
-    <tbody id=customerTable </tbody>
+    <tbody id=customerTable></tbody>
   </table>
 
 
